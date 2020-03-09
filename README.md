@@ -45,7 +45,7 @@ A docker image with kubectl, make and kustomize
 
 ## Dockerhub
 
-Not necessarily up to date [https://hub.docker.com/orgs/bythepowerof/repositories]
+Not necessarily up to date [dockerhub bythepowerof](https://hub.docker.com/orgs/bythepowerof/repositories)
 
 ## To do
 

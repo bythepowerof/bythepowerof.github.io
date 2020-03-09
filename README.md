@@ -1,37 +1,58 @@
-## Welcome to GitHub Pages
+# ByThePowerOf.github.io - WIP
 
-You can use the [editor on GitHub](https://github.com/bythepowerof/bythepowerof.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## Introduction
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+This organisation provides a suite of tools to run `make` inside a kubernetes cluster
 
-### Markdown
+Use cases are:
+* deploy kubernetes resources
+* run batch processing
+* scale manager/node processing
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+The system can be run with a controller per namespace to provide separation for multi-tenanted clusters
+Seperate components can be deployed using different service accounts.
 
-```markdown
-Syntax highlighted code block
+The idea is to be declarative as the logical unit of work is a docker image and the operation is baked into the YAML of the CRDs
 
-# Header 1
-## Header 2
-### Header 3
+## Components
 
-- Bulleted
-- List
+### [Pymake](https://github.com/bythepowerof/pymake)
 
-1. Numbered
-2. List
+A reimplementation of make in python - borrowed from [mozilla](https://github.com/mozilla/pymake)
+This is useful as you can turn makefiles into YAML - so it can form part of a custom resource.
 
-**Bold** and _Italic_ and `Code` text
+This is not perfect as pattern rules don't convert correctly. It will expand the rules rather than keep the patterns
 
-[Link](url) and ![Image](src)
-```
+### [kmake-controller](https://github.com/bythepowerof/kmake-controller)
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+A set of CRDs and controllers using [kubebuilder](https://github.com/kubernetes-sigs/kubebuilder)
 
-### Jekyll Themes
+### [gqlgen-kmakeapi](https://github.com/bythepowerof/gqlgen-kmakeapi)
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/bythepowerof/bythepowerof.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+A GQL server over the top of kmake-controller to manage and query the resources
 
-### Support or Contact
+### [kmake_gql_client](https://github.com/bythepowerof/kmake_gql_client)
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+A GQL client written in python to call gqlgen-kmakeapi
+
+### [demo-wordpress](https://github.com/bythepowerof/demo-wordpress)
+
+A wordpress exammple to deploy with kmake
+
+### [make-kubectl](https://github.com/bythepowerof/make-kubectl)
+
+A docker image with kubectl, make and kustomize
+
+## Dockerhub
+
+Not necessarily up to date https://hub.docker.com/orgs/bythepowerof/repositories
+
+## To do
+
+* An integrated example
+* write tests for controller
+* Documentation
+* Add more schedulers to kmake-controller
+
+
+
